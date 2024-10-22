@@ -1,61 +1,51 @@
 import { useState } from "react";
 import "./App.css";
-import AddNewNote from "./components/AddNewNote";
-import NoteList from "./components/NoteList";
-import NoteStatus from "./components/NoteStatus";
-import NoteHeader from "./components/NoteHeader";
-
+import AddNewNote from "./Components/AddNewNote";
+import NoteList from "./Components/NoteList";
+import NoteStatus from "./Components/NoteStatus";
+import NoteHeader from "./Components/NoteHeader";
 function App() {
-  const [notes, setNotes] = useState([]);
-  const [sortBy, setSortBy] = useState("latest");
+    const [notes, setNotes] = useState([]);
+    const [sortBy, setSortBy] = useState("latest")
 
-  const hanldeAddNote = (newNote) => {
-    setNotes((prevNotes) => [...prevNotes, newNote]);
-  };
+    const handleNote = (newNote) => {
+        return setNotes((prevNotes) => [...prevNotes, newNote])
+    }
+    const handelDelete = (id) => {
+        const filterNotes = notes.filter((n) => n.id !== +(id))
+        setNotes(filterNotes)
+    }
+    const handleComplete = (e) => {
+        const noteId = Number(e.target.value)
+        // const newNotes = notes.map((note) => {
+        //     return note.id === noteId ? { ...note, completed: !note.completed } : note
+        // })
+        setNotes((prevNotes) => prevNotes.map((note) => {
+            return note.id === noteId ? { ...note, completed: !note.completed } : note
+        }))
+    }
 
-  const handleDeleteNote = (id) => {
-    // const filteredNotes = notes.filter((n) => n.id !== id);
-    // setNotes(filteredNotes);
-    setNotes((prevNotes) => prevNotes.filter((n) => n.id !== id));
-  };
+    let sortedNodes = notes;
+    if (sortBy === "latest") sortedNodes = [...notes].sort(
+        (a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+    if (sortBy === "latest") sortedNodes = [...notes].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    if (sortBy === "cpmpleted") sortedNodes = [...notes].sort(
+        (a, b) => Number(a.completed) - Number(b.completed))
 
-  const handleCompleteNote = (e) => {
-    const noteId = Number(e.target.value);
-    // const newNotes = notes.map((note) =>
-    //   note.id === noteId ? { ...note, completed: !note.completed } : note
-    // );
-    // setNotes(newNotes);
-
-    setNotes((prevNotes) =>
-      prevNotes.map((note) =>
-        note.id === noteId ? { ...note, completed: !note.completed } : note
-      )
-    );
-  };
-
-
-
-  return (
-    <div className="container">
-      <NoteHeader
-        notes={notes}
-        sortBy={sortBy}
-        onSort={(e) => setSortBy(e.target.value)}
-      />
-      <div className="note-app">
-        <AddNewNote onAddNote={hanldeAddNote} />
-        <div className="note-container">
-          <NoteStatus notes={notes} />
-          <NoteList
-            notes={notes}
-            sortBy={sortBy}
-            onDelete={handleDeleteNote}
-            onComplete={handleCompleteNote}
-          />
+    return (
+        <div className="container">
+            <NoteHeader notes={notes} sortBy={sortBy} onSort={(e) => setSortBy(e.target.value)} />
+            <div className="note-app">
+                <AddNewNote onAddedNote={handleNote} />
+                <div className="note-container">
+                    <NoteStatus notes={notes} />
+                    <NoteList notes={sortedNodes} onDelete={handelDelete} onComplete={handleComplete} />
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    )
 }
 
 export default App;
+
