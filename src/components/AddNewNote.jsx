@@ -16,7 +16,6 @@ function AddNewNote({ onAddedNote }) {
         onAddedNote(NewNote)
         setTitle("")
         setDesc("")
-        console.log(NewNote);
     }
 
 
