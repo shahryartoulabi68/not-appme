@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import "./App.css";
 import AddNewNote from "./Components/AddNewNote";
 import NoteList from "./Components/NoteList";
 import NoteStatus from "./Components/NoteStatus";
 import NoteHeader from "./Components/NoteHeader";
+
+// function noteReduser(count, { type, payload }) {
+//     if (type === "addNewNote") return setNotes((count) => [...count, payload])
+// }
+
 function App() {
     const [notes, setNotes] = useState([]);
+    // const [state, dispatch] = useReducer(noteReduser, [])
+
     const [sortBy, setSortBy] = useState("latest")
 
     const handleNote = (newNote) => {
