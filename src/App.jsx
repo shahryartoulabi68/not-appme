@@ -1,9 +1,10 @@
 import { useReducer, useState } from "react";
 import "./App.css";
-import AddNewNote from "./Components/AddNewNote.jsx";
-import NoteList from "./Components/NoteList.jsx";
-import NoteStatus from "./Components/NoteStatus.jsx";
-import NoteHeader from "./Components/NoteHeader.jsx";
+// import NoteList from "./Components/NoteList.jsx";
+import NoteList from './components/NoteList'
+import NoteStatus from "./Components/NoteStatus";
+import NoteHeader from "./Components/NoteHeader";
+import AddNewNote from "./Components/AddNewNote";
 
 // function noteReduser(count, { type, payload }) {
 //     if (type === "addNewNote") return setNotes((count) => [...count, payload])
