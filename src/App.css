@@ -52,12 +52,15 @@
   .note-container {
     width: 100%;
   }
-
+ 
   .titleHeader {
     font-size: medium;
+    text-align: center;
+    margin-top: 1rem;
   }
   .note-header {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
     margin-bottom:1rem;
