@@ -4,13 +4,15 @@ import NoteList from './components/NoteList'
 import NoteStatus from "./components/NoteStatus";
 import NoteHeader from "./components/NoteHeader";
 import AddNewNote from "./components/AddNewNote";
+import useLocalStorag from "./components/useLocalStorag";
 
 // function noteReduser(count, { type, payload }) {
 //     if (type === "addNewNote") return setNotes((count) => [...count, payload])
 // }
 
 function App() {
-    const [notes, setNotes] = useState([]);
+    // const [notes, setNotes] = useState([]);
+        const [notes, setNotes] = useLocalStorag("NOTES", [])
     // const [state, dispatch] = useReducer(noteReduser, [])
 
     const [sortBy, setSortBy] = useState("latest")

@@ -3,7 +3,7 @@ function NoteStatus({ notes }) {
     const completed = notes.filter((n) => n.completed).length
     const open = notes.filter((n) => !n.completed).length
 
-    if (!allNotes) return <h2>not not in is</h2>
+    if (!allNotes) return <h2>There is no note</h2>
 
     return (
         <ul className="note-status">
